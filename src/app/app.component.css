@@ -205,3 +205,46 @@ button:disabled {
     background: #ccc;
     cursor: not-allowed;
 }
+.result-phrase {
+    font-size: 1.2rem; /* Smaller font size for a cute look */
+    font-weight: 500; /* Balanced weight for elegance */
+    color: #ff6ec7; /* Soft pink for charm */
+    background: rgba(255, 110, 199, 0.1); /* Subtle pink background */
+    padding: 8px 15px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInScale 0.5s ease-in-out;
+  }
+  
+  .animated-phrase {
+    background: #fff; /* White background for contrast */
+    color: #ff6ec7; /* Matching text color */
+    padding: 5px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    border: 2px dashed #ffaad4; /* Dashed border for a playful effect */
+    font-size: 1rem; /* Slightly smaller size for compactness */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .animated-phrase:hover {
+    transform: translateY(-3px); /* Cute pop-up effect */
+    box-shadow: 0 4px 8px rgba(255, 110, 199, 0.2);
+  }
+  
+  /* Animations */
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+    

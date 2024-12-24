@@ -1,3 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white fw-bold" href="#">📊 IPO Probability</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
 <div class="container mt-5">
   <div class="card shadow-lg p-5 rounded-lg bg-light animate-card">
     <h1 class="text-center mb-4 text-primary fw-bold">✨ IPO Probability Calculator ✨</h1>
@@ -92,6 +109,11 @@
         >
           Probability: <span>{{ result.probability }}</span>
         </li>
+        <div *ngIf="result" class="result-phrase text-center mt-4">
+          <p class="animated-phrase">{{ getCreativePhrase(result.probability) }}</p>
+        </div>
+        
+        
       </ul>
     </div>
   </div>
