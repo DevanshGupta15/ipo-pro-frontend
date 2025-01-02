@@ -66,7 +66,7 @@ export class AppComponent {
     this.isLoading = true;
 
     try {
-      const response = await axios.post('http://localhost:3000/api/check-ipo', {
+      const response = await axios.post('/api/check-ipo', {
         // const response = await axios.post('/api/check-ipo', {
         ipoName: this.ipoName,
         investment: this.investment,
@@ -103,8 +103,8 @@ export class AppComponent {
     this.isLoading = true;
     try {
       const [statusResponse, performanceResponse] = await Promise.all([
-        axios.get('http://localhost:3000/api/status'),
-        axios.get('http://localhost:3000/api/performance'),
+        axios.get('/api/status'),
+        axios.get('/api/performance'),
       ]);
       this.statusData = statusResponse.data.data;
       this.performanceData = performanceResponse.data.data;
@@ -193,7 +193,8 @@ export class AppComponent {
   async ipoNames() {
     try {
 
-      const response = await axios.get("http://localhost:3000/api/suggestions")
+     // const response = await axios.get("http://localhost:3000/api/suggestions")
+      const response = await axios.get("/api/suggestions")
       console.log("reponse of ipo name is comnig as", response.data.data)
       this.ipoSuggestions = response.data.data
 
