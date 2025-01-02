@@ -1,24 +1,95 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bold" href="#">📊 IPO Probability</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand text-white fw-bold" href="#">📊 IPO Insights</a>
+    
+    <!-- Navigation Toggle Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navigation Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#calculator">🧮 Calculator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#metrics">📈 Metrics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#performance">📊 Performance</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#insights">📊 Insights</a>
+        </li>
+      </ul>
+
+     
+      
+    </div>
   </div>
 </nav>
 
-<div class="container mt-5">
-  <div class="card shadow-lg p-5 rounded-lg bg-light animate-card">
-    <h1 class="text-center mb-4 text-primary fw-bold">✨ IPO Probability Calculator ✨</h1>
+<!-- Page Progress Indicator -->
+<div class="progress" style="height: 3px;">
+  <div class="progress-bar bg-success" role="progressbar" [style.width.%]="scrollProgress"></div>
+</div>
 
+<!-- Notification Banner -->
+<div class="alert alert-info alert-dismissible fade show m-0" role="alert" *ngIf="showNotification">
+  <div class="container">
+    <strong>🔔 New!</strong> Check out our latest IPO insights and market analysis.
+    <button type="button" class="btn-close" (click)="closeNotification()"></button>
+  </div>
+</div>
+
+
+<!-- Quick Navigation Cards -->
+<div class="container mt-4">
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm hover-card">
+        <div class="card-body text-center">
+          <i class="bi bi-calculator fs-1 text-primary mb-3"></i>
+          <h5 class="card-title">IPO Calculator</h5>
+          <p class="card-text small">Calculate your chances of IPO allotment</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm hover-card">
+        <div class="card-body text-center">
+          <i class="bi bi-graph-up fs-1 text-success mb-3"></i>
+          <h5 class="card-title">Market Metrics</h5>
+          <p class="card-text small">View key IPO performance indicators</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm hover-card">
+        <div class="card-body text-center">
+          <i class="bi bi-calendar-check fs-1 text-warning mb-3"></i>
+          <h5 class="card-title">IPO Calendar</h5>
+          <p class="card-text small">Track upcoming and ongoing IPOs</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 shadow-sm hover-card">
+        <div class="card-body text-center">
+          <i class="bi bi-bar-chart fs-1 text-info mb-3"></i>
+          <h5 class="card-title">Insights</h5>
+          <p class="card-text small">Deep dive into IPO market</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <!-- IPO Probability Calculator Box -->
+  <div id="calculator" class="calculator-section card shadow-lg p-5 rounded-lg mb-5">
+    <h2 class="text-primary fw-bold text-center mb-4">✨ IPO Probability Calculator ✨</h2>
     <form (submit)="onSubmit()" class="needs-validation" novalidate>
       <!-- IPO Name Dropdown -->
       <div class="form-group mb-4">
@@ -110,14 +181,343 @@
           Probability: <span>{{ result.probability }}</span>
         </li>
         <div *ngIf="result" class="result-phrase text-center mt-4">
-          <p class="animated-phrase">{{ getCreativePhrase(result.probability) }}</p>
+          <p class="animated-phrase">{{ getCreativePhrase(getProbabilityNumber()) }}</p>
+
         </div>
-        
-        
       </ul>
+    </div>
+  </div>
+
+  <!-- Metrics Section -->
+  <div id="metrics" class="container-fluid mt-5">
+    <div class="row">
+      <!-- KPI Metrics -->
+      <div class="col-md-6">
+        <div class="kpi-section card shadow-lg p-4 rounded-lg">
+          <h4 class="text-primary fw-bold text-center mb-4">📈 Key IPO Metrics in 2024</h4>
+          <div class="row text-center">
+            <div class="col-6 mb-3">
+              <div class="kpi-box bg-light border border-primary rounded-lg p-3">
+                <h6>Total IPOs</h6>
+                <p class="fw-bold fs-5 text-primary">{{ performanceData.totalIPOs }}</p>
+              </div>
+            </div>
+            <div class="col-6 mb-3">
+              <div class="kpi-box bg-light border border-success rounded-lg p-3">
+                <h6>Above GMP</h6>
+                <p class="fw-bold fs-5 text-success">{{ performanceData.aboveGMP }}</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="kpi-box bg-light border border-danger rounded-lg p-3">
+                <h6>Below GMP</h6>
+                <p class="fw-bold fs-5 text-danger">{{ performanceData.belowGMP }}</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="kpi-box bg-light border border-info rounded-lg p-3">
+                <h6>Total Issue Size</h6>
+                <p class="fw-bold fs-5 text-info">₹{{ performanceData.totalIssueSize }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- IPO Performance -->
+      <div id="performance" class="col-md-6">
+        <div class="performance-section card shadow-lg p-4 rounded-lg">
+          <h4 class="text-primary fw-bold text-center mb-4">📅 IPO Performance</h4>
+          <!-- Ongoing IPOs -->
+          <div *ngIf="statusData.ongoing.length" class="mb-4">
+            <h5 class="text-success fw-bold">Ongoing IPOs</h5>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let ipo of statusData.ongoing">
+                <strong>{{ ipo.name }}</strong> - GMP: ₹{{ ipo.gmp }}, Size: {{ ipo.size }}
+                <br /><small>Closes: {{ ipo.closeDate }}</small>
+         
+              </li>
+            </ul>
+          </div>
+  
+          <!-- Upcoming IPOs -->
+          <div *ngIf="statusData.upcoming.length">
+            <h5 class="text-warning fw-bold">Upcoming IPOs</h5>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let ipo of statusData.upcoming">
+                <strong>{{ ipo.name }}</strong> - GMP: ₹{{ ipo.gmp }}, Size: {{ ipo.size }}
+                <br /><small>Opens: {{ ipo.openDate }} | Closes: {{ ipo.closeDate }}</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+
+<!-- Blog Hero Section -->
+  <div id="insights" class="container">
+    
+  </div>
+
+  <!-- Momentum and Value Recommendations -->
+<div class="container mt-5">
+  <h2 class="text-center mb-5">Momentum Recommendations (1st Jan 2024)</h2>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-success mb-2">Buy</span>
+          <h5 class="card-title">Shakti Pumps</h5>
+          <p class="small text-muted">Thesis: Strong market position and robust growth potential. Solar pump themes</p>
+          <p class="mb-2">Price to Buy: ₹1120</p>
+          <div class="indicator bg-success"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-success mb-2">Buy</span>
+          <h5 class="card-title">Orient Technologies</h5>
+          <p class="small text-muted">Thesis: Strong performance in tech sector growth.Cloud Computation plau</p>
+          <p class="mb-2">Price to Buy: ₹490</p>
+          <div class="indicator bg-success"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-success mb-2">Buy</span>
+          <h5 class="card-title">PG Electroplast</h5>
+          <p class="small text-muted">Thesis: Benefiting from strong industrial growth and demand. Popular demand</p>
+          <p class="mb-2">Price to Buy: ₹1023</p>
+          <div class="indicator bg-success"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-5">Value Recommendations (1st Jan 2024)</h2>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-primary mb-2">Buy</span>
+          <h5 class="card-title">Tata Motors</h5>
+          <p class="small text-muted">Thesis: Undervalued with strong fundamentals in the auto sector</p>
+          <p class="mb-2">Price to Buy: ₹749</p>
+          <div class="indicator bg-primary"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-primary mb-2">Buy</span>
+          <h5 class="card-title">KNR Construction</h5>
+          <p class="small text-muted">Thesis: Attractive valuation with promising infrastructure projects</p>
+          <p class="mb-2">Price to Buy: ₹342</p>
+          <div class="indicator bg-primary"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="recmd_card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="badge bg-primary mb-2">Buy</span>
+          <h5 class="card-title">Coal India</h5>
+          <p class="small text-muted">Thesis: Strong government backing and consistent earnings</p>
+          <p class="mb-2">Price to Buy: ₹386</p>
+          <div class="indicator bg-primary"></div>
+          <button class="btn btn-outline-primary btn-sm rounded-pill">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Latest Posts Grid -->
+<div class="container mt-5">
+  <h2 class="text-center mb-5">Latest Insights</h2>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="blog-card card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="tag bg-primary text-white">Featured</span>
+          <h2 class="mt-3 mb-2">Complete Guide to IPO Investment Strategy 2025</h2>
+          <p class="post-meta">January 2, 2024 · 8 min read</p>
+          <p>Master the art of IPO investing with our comprehensive guide covering market analysis, timing strategies, and risk management techniques.</p>
+          <a href="https://www.linkedin.com/pulse/complete-guide-ipo-investing-2025-what-every-new-investor-should-hlabc/" target="_blank" 
+             class="btn btn-primary rounded-pill px-4">Read More</a>
+        </div>
+      </div>
+    </div>
+    <span style="margin-top: 40px;"></span>
+
+   
+  </div>
+  <div class="row g-4">
+    <!-- Topic 1 -->
+    <div class="col-md-4" *ngFor="let post of [1]">
+      <div class="blog-card card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="tag bg-info text-white">Strategy</span>
+          <h5 class="mt-3">How to Evaluate IPO Valuations</h5>
+          <p class="post-meta">December 28, 2023 · 5 min read</p>
+          <p>Learn the key metrics and frameworks for assessing IPO valuations effectively.</p>
+          <a href="https://www.nirmalbang.com/knowledge-center/ipo-valuation.html" target="_blank" 
+             class="btn btn-outline-primary rounded-pill px-4">Read More</a>
+        </div>
+      </div>
+    </div>
+    <!-- Topic 2 -->
+    <div class="col-md-4">
+      <div class="blog-card card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="tag bg-info text-white">Investments</span>
+          <h5 class="mt-3">The Role of Grey Market Premium in IPO</h5>
+          <p class="post-meta">December 20, 2023 · 4 min read</p>
+          <p>Understand how GMP influences IPO decisions and what it signifies for investors.</p>
+          <a href="https://zerodha.com/ipo/" target="_blank" class="btn btn-outline-primary rounded-pill px-4">Read More</a>
+        </div>
+      </div>
+    </div>
+    <!-- Topic 3 -->
+    <div class="col-md-4">
+      <div class="blog-card card shadow-lg fade-up">
+        <div class="card-body p-4">
+          <span class="tag bg-info text-white">Finance</span>
+          <h5 class="mt-3">Top 5 Upcoming IPOs to Watch in 2024</h5>
+          <p class="post-meta">December 15, 2023 · 6 min read</p>
+          <p>A curated list of promising IPOs to consider in the upcoming year for savvy investors.</p>
+          <a href="https://www.angelone.in/knowledge-center/ipo/what-is-gmp-in-ipo#:~:text=Grey%20Market%20Premium%20(GMP)%20is,price%20set%20by%20the%20company." target="_blank" class="btn btn-outline-primary rounded-pill px-4">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="content-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="stat-card">
+          <div class="row mt-4">
+            <div class="col-6">
+              <h4 class="text-primary">35+</h4>
+              <p>Upcoming IPOs</p>
+            </div>
+            <div class="col-6">
+              <h4 class="text-success">₹1.2T</h4>
+              <p>Total Value of Upcoming IPOs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="stat-card">
+          <div class="row mt-4">
+            <div class="col-6">
+              <h4 class="text-warning">80%</h4>
+              <p>IPO Success Rate</p>
+            </div>
+            <div class="col-6">
+              <h4 class="text-info">5x</h4>
+              <p>Average Subscription Multiple</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white mt-5 py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>IPO Insights</h5>
+        <p class="small">Your trusted partner for IPO investments and analysis</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white-50">Home</a></li>
+          <li><a href="#calculator" class="text-white-50">IPO Calculator</a></li>
+          <li><a href="#metrics" class="text-white-50">Performance</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Contact</h5>
+        <ul class="list-unstyled">
+          <li><a href="mailto:devanshguptahero@gmail.com" class="text-white-50">Contact Me</a></li>
+          <li><a href="#" class="text-white-50" data-bs-toggle="modal" data-bs-target="#faqModal">FAQ</a></li>
+          <li><a href="mailto:devanshguptahero@gmail.com" class="text-white-50">Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row mt-4 text-center">
+      <div class="col-12">
+        <p class="small">Made with ❤️ in Mumbai | <a href="https://www.linkedin.com/in/devansh-gupta-b152a7186/" target="_blank" class="text-white-50">LinkedIn</a></p>
+      </div>
+    </div>
+    
+  </div>
+</footer>
+
+<!-- FAQ Modal -->
+<!-- FAQ Modal -->
+<div class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded-4">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-primary" id="faqModalLabel">Frequently Asked Questions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="faq-item mb-3">
+          <h6 class="fw-bold">What is IPO?</h6>
+          <p class="text-muted">IPO (Initial Public Offering) is the process through which a private company offers shares to the public for the first time. It provides an opportunity for the company to raise capital from public investors.</p>
+        </div>
+        <div class="faq-item mb-3">
+          <h6 class="fw-bold">How do I calculate IPO allotment chances?</h6>
+          <p class="text-muted">The IPO probability is calculated based on factors like investment amount, investor category, and the number of PANs involved in the application.</p>
+        </div>
+        <div class="faq-item mb-3">
+          <h6 class="fw-bold">When should I apply for an IPO?</h6>
+          <p class="text-muted">It is recommended to apply for an IPO after thorough research. Our tools can help you assess the right time based on market trends and IPO performance.</p>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-primary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 

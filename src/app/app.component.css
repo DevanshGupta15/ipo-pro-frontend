@@ -1,250 +1,294 @@
+/* Global Styles */
 body {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.container {
-    max-width: 600px;
-}
-
-.card {
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-.card h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-.form-control,
-.form-select {
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.8);
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
     color: #333;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #6a11cb;
-    box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
-}
-
-button {
-    border-radius: 10px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    transition: all 0.3s ease;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.result-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 25px;
-    animation: slideIn 0.5s ease-in-out;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.probability-item span {
-    font-size: 1.8rem;
+  }
+  
+  .navbar {
+    background-color: #0069d9;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+    color: #ffffff;
     font-weight: bold;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.suggestions-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.suggestion-item:hover {
-    background-color: #f0f0f0;
-}
-
-.transition-btn {
-    transition: all 0.3s ease-in-out;
-}
-
-.transition-btn:hover {
-    background-color: #0056b3;
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover {
+    color: #d1e7fd;
+  }
+  
+  .hover-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .hover-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.result-card {
-    border: 2px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calculator-section {
+    background-color: #ffffff;
     border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.form-select {
-    transition: border-color 0.2s ease;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    .card h1 {
-        font-size: 2rem;
-    }
-
-    .form-control,
-    .form-select {
-        font-size: 1rem;
-    }
-
-    button {
-        font-size: 1rem;
-    }
-
-    .probability-item span {
-        font-size: 1.5rem;
-    }
-}
-
-/* Improved Result Styling */
-.result-card {
-    border: 2px solid #e0e0e0;
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Input Focus Styling */
-.form-control:focus, .form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Hover Effect for Dropdown */
-.form-select {
-    transition: border-color 0.2s ease;
-}
-
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-.result-phrase {
-    font-size: 1.2rem; /* Smaller font size for a cute look */
-    font-weight: 500; /* Balanced weight for elegance */
-    color: #ff6ec7; /* Soft pink for charm */
-    background: rgba(255, 110, 199, 0.1); /* Subtle pink background */
-    padding: 8px 15px;
-    border-radius: 15px;
-    display: inline-block;
-    margin-top: 10px;
+  }
+  
+  .form-select,
+  .form-control {
+    border-radius: 8px;
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  .result-card {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .probability-item {
+    font-size: 1.25rem;
+  }
+  
+  .text-center {
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeInScale 0.5s ease-in-out;
+  }
+  
+  .text-success {
+    color: #28a745 !important;
   }
   
   .animated-phrase {
-    background: #fff; /* White background for contrast */
-    color: #ff6ec7; /* Matching text color */
-    padding: 5px 10px;
-    border-radius: 12px;
-    display: inline-block;
-    border: 2px dashed #ffaad4; /* Dashed border for a playful effect */
-    font-size: 1rem; /* Slightly smaller size for compactness */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1rem; /* Increase font size */
+    font-weight: bold;
+    animation: fadeIn 2s ease-out;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for subtle depth */
   }
-  
-  .animated-phrase:hover {
-    transform: translateY(-3px); /* Cute pop-up effect */
-    box-shadow: 0 4px 8px rgba(255, 110, 199, 0.2);
-  }
-  
-  /* Animations */
-  @keyframes fadeInScale {
+    
+  @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.9);
     }
     to {
       opacity: 1;
-      transform: scale(1);
     }
   }
   
-    
+  .transition-btn {
+    transition: background-color 0.3s;
+  }
+  
+  .transition-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  footer {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  footer a {
+    color: #d1e7fd;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+
+  
+
+  /* Styling for FAQ Modal */
+.faq-item h6 {
+    font-size: 1.1rem;
+    color: #007bff; /* Primary color */
+    margin-bottom: 0.5rem;
+  }
+  
+  .faq-item p {
+    font-size: 0.95rem;
+    color: #6c757d;
+    line-height: 1.6;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #f1f1f1;
+    padding: 15px;
+    text-align: right;
+  }
+  
+  .btn-close {
+    background: none;
+    border: none;
+  }
+  
+  button.btn-outline-primary {
+    border-radius: 25px;
+    padding: 10px 25px;
+    border: 2px solid #007bff;
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  button.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .faq-item:hover {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .faq-item h6:hover {
+    color: #0056b3;
+    cursor: pointer;
+  }
+  
+
+  /* //blog */
+  :root {
+    --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    --secondary-gradient: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%);
+    --card-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    --hover-transform: translateY(-5px);
+  }
+  
+  .hover-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .hover-card:hover {
+    transform: var(--hover-transform);
+    box-shadow: var(--card-shadow);
+  }
+  
+  .blog-hero {
+    background: var(--primary-gradient);
+    padding: 3rem 0;
+    margin-top: 1rem;
+    color: white;
+  }
+  
+  .blog-card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .blog-card:hover {
+    transform: var(--hover-transform);
+    box-shadow: var(--card-shadow);
+  }
+  
+  .tag {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .content-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem 0;
+    margin-top: 2rem;
+    border-radius: 1rem;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow);
+  }
+  
+  .post-meta {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  
+  .recommd_card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.recommd_card:hover {
+    transform: translateY(-5px);
+}
+
+.recommd_card-body {
+    padding: 1.5rem;
+}
+
+.recommd_badge {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.recommd_badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.recommd_indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.recommd_indicator-up {
+    background-color: #28a745; /* Green for upward trend */
+}
+
+.recommd_indicator-down {
+    background-color: #dc3545; /* Red for downward trend */
+}
+
+/* Add some subtle gradients for a more modern look */
+.recommd_card {
+    background-image: linear-gradient(to bottom right, #f9f9f9, #fff); 
+}
+
+
